@@ -1,0 +1,128 @@
+<html>
+<head>
+<HTA:APPLICATION
+  APPLICATIONNAME="Simple HTA Application Launcher"
+  SYSMENU="yes">
+<title>Simple HTA Application Launcher</title>
+<meta http-equiv="x-ua-compatible" content="ie=9" />
+<style type="text/css">
+  body {background-color:lightsteelblue;}
+/* CSSTerm.com Simple CSS menu */
+
+.menu_simple ul {
+    margin: 0; 
+    padding: 0;
+    width:180px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+    list-style-type: none;
+}
+
+.menu_simple ul li a {
+    text-decoration: none;
+    color: white; 
+    padding: 10.5px 11px;
+    background-color: #005555;
+    display:block;
+}
+ 
+.menu_simple ul li a:visited {
+    color: white;
+}
+ 
+.menu_simple ul li a:hover, .menu_simple ul li .current {
+    color: white;
+    background-color: #5FD367;
+}
+
+</style>
+
+
+
+<script language="vbscript">
+Sub RunRDP2TSFarm()
+	Set objShell = CreateObject("WScript.Shell") 
+	objShell.Run("mstsc /f /v:192.168.10.8"), 1, True
+End Sub
+Sub testpopup2
+  MsgBox "debug popup -1"
+ End Sub
+</script>
+
+
+
+<script type="text/javascript" language="javascript">
+	var text = '{"apps":[' +
+	'{"app":"mstsc.exe","param":"/f /v:10.0.0.238","name":"TS" },' +
+	'{"app":"explorer.exe","param":"c:\\\\","name":"Explorer C:" },' +
+	'{"app":"explorer.exe","param":"\\\\\\\\a\\\\b","name":"Explorer Server" },' +
+	'{"app":"explorer.exe","param":"c:\\\\software","name":"Explorer software" },' +
+	'{"app":"\\\"C:\\\\Program Files (x86)\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\\\"","param":"http://www.google.es","name":"Chrome google" },' +
+	'{"app":"iexplore.exe","param":"http://www.google.es","name":"Google" }]}';
+
+	obj = JSON.parse(text);
+	
+    function RunFile2() {
+		WshShell = new ActiveXObject("WScript.Shell");
+		WshShell.Run("mstsc /f /v:192.168.10.8", 1, false);
+    }
+	function RunFile(sFile, sArguments) {
+		WshShell = new ActiveXObject("WScript.Shell");
+		WshShell.Run(sFile,sArguments, 1, false);
+    }
+	function fnShellExecuteJ(sFile, sArguments)
+    {
+		//var str2 = sArguments.replace(/\//g, '\\');
+        var objShell = new ActiveXObject("shell.application");
+        //objShell.ShellExecute("notepad.exe", "", "", "open", 1);
+		objShell.ShellExecute(sFile, sArguments, "", "open", 1);
+		//document.getElementById("demo").innerHTML = str2 + " " + sFile + " " + sArguments;
+		document.getElementById("demo").innerHTML = sFile + " " + sArguments;
+    }
+	function alert(message)
+	{
+		window.alert(message);
+	}
+	
+</script>
+
+
+</head>
+<html>
+<body>
+	<div class="menu_simple">
+		<ul>
+			<li><a href="#" id="m1" onclick='fnShellExecuteJ(obj.apps[0].app,obj.apps[0].param)'></a></li>
+			<li><a href="#" id="m2" onclick='fnShellExecuteJ(obj.apps[1].app,obj.apps[1].param)'></a></li>
+			<li><a href="#" id="m3" onclick='fnShellExecuteJ(obj.apps[2].app,obj.apps[2].param)'></a></li>
+			<li><a href="#" id="m4" onclick='fnShellExecuteJ(obj.apps[3].app,obj.apps[3].param)'></a></li>
+			<li><a href="#" id="m5" onclick='fnShellExecuteJ(obj.apps[4].app,obj.apps[4].param)'></a></li>
+			<li><a href="#" id="m6" onclick='fnShellExecuteJ(obj.apps[6].app,obj.apps[6].param)'></a></li>
+		</ul>
+	</div>
+	<script language="javascript" type="text/javascript">
+		window.resizeTo(620,480);
+		document.getElementById("m1").innerHTML = obj.apps[0].name
+		document.getElementById("m2").innerHTML = obj.apps[1].name
+		document.getElementById("m3").innerHTML = obj.apps[2].name
+		document.getElementById("m4").innerHTML = obj.apps[3].name
+		document.getElementById("m5").innerHTML = obj.apps[4].name
+		document.getElementById("m5").innerHTML = obj.apps[5].name
+	</script>
+</body>
+
+
+<!--
+<div style="position: relative;background-color: blue; width: 400px; height: 100px;">    
+
+    <div id="demo" style="position: absolute; bottom: 5px; background-color: green">
+    Tudel (C) 2016
+    </div>
+</div>
+-->
+<div style="position: relative">
+     <p id="demo" style="position: fixed; bottom: 0; width:100%; text-align: center"> TEXT YOU WANT
+     </p>
+</div>
+
+</html>

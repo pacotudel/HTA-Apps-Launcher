@@ -1,0 +1,196 @@
+<!doctype html>
+<html>
+<head>
+<HTA:APPLICATION
+  APPLICATIONNAME="Simple HTA Application Launcher"
+  SYSMENU="yes">
+<title>Simple HTA Application Launcher</title>
+<meta http-equiv="x-ua-compatible" content="ie=9" />
+<!--
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+-->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<style type="text/css">
+div.example {border: #603 none; padding: 0.6em; margin: 1em 2em}
+
+/* First example */
+div.items p:not(:target) {display: none}
+div.items p:target {display: block; outline: none}
+p.menu {margin: 0; padding: 0.4em; background: silver; color: black}
+p.menu a {color: black; border: thin outset silver; padding: 0.1em 0.3em}
+div.items p {height: 6em; overflow: auto; text-align: center; margin: 0}
+#item1 {color: red}
+#item2 {color: green}
+#item3 {color: blue}
+
+/* Tabbed example */
+div.tabs {
+  min-height: 7em;		/* No height: can grow if :target doesn't work */
+  position: relative;		/* Establish a containing block */
+  line-height: 1;		/* Easier to calculate with */
+  z-index: 0}			/* So that we can put other things behind */
+div.tabs > div {
+  display: inline}		/* We want the buttons all on one line */
+div.tabs > div > a {
+  color: black;			/* Looks more like a button than a link */
+  background: #CCC;		/* Active tabs are light gray */
+  padding: 0.2em;		/* Some breathing space */
+  border: 0.1em outset #BBB;	/* Make it look like a button */
+  border-bottom: 0.1em solid #CCC} /* Visually connect tab and tab body */
+div.tabs > div:not(:target) > a {
+  border-bottom: none;		/* Make the bottom border disappear */
+  background: #999}		/* Inactive tabs are dark gray */
+div.tabs > div:target > a,	/* Apply to the targeted item or... */
+:target #default2 > a {		/* ... to the default item */
+  border-bottom: 0.1em solid #CCC; /* Visually connect tab and tab body */
+  background: #CCC}		/* Active tab is light gray */
+div.tabs > div > div {
+  background: #CCC;		/* Light gray */
+  z-index: -2;			/* Behind, because the borders overlap */
+  left: 0; top: 1.3em;		/* The top needs some calculation... */
+  bottom: 0; right: 0;		/* Other sides flush with containing block */
+  overflow: auto;		/* Scroll bar if needed */
+  padding: 0.3em;		/* Looks better */
+  border: 0.1em outset #BBB}	/* 3D look */
+div.tabs > div:not(:target) > div { /* Protect CSS1 & CSS2 browsers */
+  position: absolute }		/* All these DIVs overlap */
+div.tabs > div:target > div, :target #default2 > div {
+  position: absolute;		/* All these DIVs overlap */
+  z-index: -1}			/* Raise it above the others */
+
+div.tabs :target {
+  outline: none}
+</style>
+ <link rel="stylesheet" href="css/cssbutton.css">
+<style type="text/css">
+body {background-color:lightsteelblue;}
+
+.yui3-button {
+    margin:3px;
+}
+
+.warning{
+    background-color:#FAF55F;
+}
+
+.success{
+    background-color:#57A957;
+    color:white;
+}
+
+.error{
+    background-color:#C43C35;
+    color:white;
+}
+
+.notice{
+    background-color:#1B7AE0;
+    color:white;
+}
+
+.yui3-button-icon {
+    background-image: url("media/icon-sprite-dark-and-light-24.png");
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 20px;
+    vertical-align: middle;
+    width: 20px;
+}
+
+.yui3-button-icon-bold {
+	background-position: 1px -1px;
+}
+
+.yui3-button-icon-italic {
+	background-position: 1px -37px;
+	background-image: url("media/icon-sprite-dark-and-light-24.png");
+}
+
+.yui3-button-icon-underline {
+	background-position: 1px -73px;
+	background-image: url("media/icon-sprite-dark-and-light-24.png");
+}
+			
+.shadow{
+    text-shadow: #333 6px -2px 2px;
+}
+</style>
+<script type="text/javascript" src="blocks.js"></script>
+<script language="javascript" type="text/javascript">
+ // 'JSON' data included as above
+   //data = '[{"blue" : "is ok", "red" : "mstsc.exe"}]';
+  window.resizeTo(640,580);
+  var someData_notJSON = JSON.parse(data);
+    //console.log(someData_notJSON[0].red); // Will log "is my fave color"
+</script>
+
+<script>
+
+
+function RunFile(sFile, sArguments) {
+		WshShell = new ActiveXObject("WScript.Shell");
+		WshShell.Run(sFile,sArguments, 1, false);
+    }
+	function fnShellExecuteJ(sFile, sArguments)
+    {
+		//var str2 = sArguments.replace(/\//g, '\\');
+        var objShell = new ActiveXObject("shell.application");
+        //objShell.ShellExecute("notepad.exe", "", "", "open", 1);
+		objShell.ShellExecute(sFile, sArguments, "", "open", 1);
+		//document.getElementById("demo").innerHTML = str2 + " " + sFile + " " + sArguments;
+		//document.getElementById("demo").innerHTML = sFile + " " + sArguments;
+    }
+</script>
+
+</head>
+<body>
+
+<table border="0" style="width:100%" >
+	<tr>
+		<td align="center" valign="middle">MENU</td>
+		<td align="right" valign="middle"><img src="./media/logo.jpg" alt="" border=0 ></img></td>
+	</tr>
+</table>
+<div class=example>
+    <div class=tabs>
+     <div id=tab1> <a href="#tab1">Programas</a>
+      <div>
+		<input type='image' id='imageButton' class='yui3-button' src="media/ts.gif" width="10%" height="70%" onclick='fnShellExecuteJ("mstsc.exe","")'></input>
+		<input type='image' id='imageButton' class='yui3-button' src="media/vmware.gif" width="10%" height="70%" onclick='fnShellExecuteJ(someData_notJSON[0].app,"")'></input>
+		</div>
+     </div>
+
+     <div id=tab2> <a href="#tab2">Avisos</a>
+      <div>... 30 lines of CSS is rather a lot, and...</div>
+     </div>
+
+     <div id=tab3> <a href="#tab3">Informacion</a>
+      <div>... that 2 should have been enough, but...<br>bla<br>bla<br>bla<br>bla<br>bla<br>bla</div>
+     </div>
+	 
+	 <div id=tab4> <a href="#tab4">Herramientas</a>
+		<div>
+			<div class="list-group">
+				<a href="#" class="list-group-item"><i class="fa fa-home fa-fw"></i> Home</a>
+				<a href="#" class="list-group-item"><i class="fa fa-book fa-fw"></i> Library</a>
+				<a href="#" class="list-group-item"><i class="fa fa-pencil fa-fw"></i> Applications</a>
+				<a href="#" class="list-group-item"><i class="fa fa-cog fa-fw"></i> Settings</a>
+			</div>
+		</div>
+     </div>
+
+     
+    </div>
+   </div>
+  </div>
+<script language="VBScript">
+Sub RunRDP2TSFarm()
+	Set objShell = CreateObject("WScript.Shell") 
+	objShell.Run("mstsc /f /v:10.0.0.238"), 1, True
+End Sub
+</script>
+        
+</body>
+</html>
