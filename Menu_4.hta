@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Tareas disponibles</title>
+<HTA:APPLICATION
+  APPLICATIONNAME="Tareas disponibles"
+  ID="Tareas disponibles"
+  VERSION="1.0"/>
+
+<STYLE></STYLE>
+</head>
+
+<script language="VBScript">
+
+Sub Window_OnLoad
+	Me.ResizeTo 450,750
+	Me.MoveTo Screen.Width / 2 - 400,Screen.Height / 2 - 400
+End Sub
+
+Sub ExitProgram
+        window.close()
+    End Sub
+
+Sub RunRDP2TSFarm()
+	Set objShell = CreateObject("WScript.Shell") 
+	objShell.Run("mstsc /f /v:10.0.0.238"), 1, True
+End Sub
+
+Sub RebootPC()
+	Set objShell = CreateObject("WScript.Shell") 
+	objShell.Run("shutdown -t 0 -r -f"), 1, True
+End Sub
+
+Sub ShutdownPC()
+	Set objShell = CreateObject("WScript.Shell") 
+	objShell.Run("shutdown -t 0 -r -f"), 1, True
+End Sub
+
+</script>
+</head> 
+
+<body bgcolor="white">
+<font face="Arial"><h3>WinLogon</h3>
+
+<br><br>You can set this easily as Shell substiture
+
+<br><br><button onclick='vbscript:RunRDP2TSFarm'>Conectar a TS</button>
+<br><br><button onclick='vbscript:RebootPC'>Reiniciar PC</button>
+<br><br><button onclick='vbscript:ShutdownPC'>Apagar PC</button>
+
+<br><br><input id=runbutton type="button" value="Exit" onClick="ExitProgram"><br>
+
+</font>
+
+
+</body>
+</html>
